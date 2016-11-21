@@ -16,7 +16,9 @@
 
 import os, sys, re, string, getpass, email, poplib, imaplib
 import logging, traceback
-
+#####################
+import getStory
+#####################
 
 # 如果get_charsets()查找不到编码信息, 则采用下面方式:
 def check_code(msg):
@@ -259,19 +261,14 @@ def imap_fetch_mail(db, db_name, uid, file_path):
         logging.info("  -Start to insert mail attachment to mysql tb_mail_atta.")
         for file_name in mail_atta:
             logging.info("  -Insert Pass!")
-#####################
-import getStory
-#####################
+
 # 主程序开始
 if __name__ == "__main__":
-    
+
     logging.basicConfig(filename="/mnt/us/DK_System/xKindle/pop3.log", format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     rootLog = logging.getLogger()
     rootLog.setLevel(logging.DEBUG)
-#########################################
-    getStory.parse("3_3096")
-    getStory.parse("1_1124")
-#########################################
+
     if len(sys.argv) < 6:  
         logging.debug("please input the server port username password filepath, return \n")
         sys.exit(11)
@@ -376,3 +373,10 @@ if __name__ == "__main__":
     else:
         print "Don't know mail server."
 
+
+    #########################################
+    logging.info("Begin Parsing ----------------------------------------- \n")
+    getStory.parse("1_1124")
+    getStory.parse("3_3096")
+    logging.info("End Parsing   ++++++++++++++++++++++++++++++++++++++++++ \n")
+    #########################################
